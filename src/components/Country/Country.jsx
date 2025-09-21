@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
 import './Country.css';
 
-const Country = ({ country }) => {
+const Country = ({ country , handleVisitedCountries , handleKnownFlags }) => {
+
+    // console.log(handleVisitedCountries)
 
     const [Visited, setVisited] = useState(false);
 
     // console.log(country.area.area)
 
-    const handleVisited = () =>{
+    const handleVisited = () => {
         Visited
         ? setVisited(false)
         : setVisited(true)
+
+        handleVisitedCountries(country)
     }
 
     return (
@@ -21,18 +25,20 @@ const Country = ({ country }) => {
             <p>Area: {country.area.area}
                 {
                     country.area.area > 300000
-                    ? ' Big Country'
-                    : ' Small Country'
-                } 
+                        ? ' Big Country'
+                        : ' Small Country'
+                }
             </p>
             <button onClick={handleVisited}>
                 {
                     Visited
-                    ? 'Visited'
-                    : 'Not Visited'
+                        ? 'Visited'
+                        : 'Not Visited'
                 }
             </button>
-
+            <button onClick={()=> handleKnownFlags(country?.flags?.flags.png)}>
+                Add to Known Flags
+            </button>
         </div>
     );
 };
